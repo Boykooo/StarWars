@@ -1,0 +1,10 @@
+H:\StarWars\StarWars\bin\Release\StarWars.exe
+H:\StarWars\StarWars\bin\Release\StarWars.pdb
+H:\StarWars\StarWars\obj\x86\Release\StarWars.EditorLevel.Editor.resources
+H:\StarWars\StarWars\obj\x86\Release\StarWars.Game.NewGameForm.resources
+H:\StarWars\StarWars\obj\x86\Release\StarWars.SettingsLevel.SettingLevel.resources
+H:\StarWars\StarWars\obj\x86\Release\StarWars.StartForm.resources
+H:\StarWars\StarWars\obj\x86\Release\StarWars.Properties.Resources.resources
+H:\StarWars\StarWars\obj\x86\Release\StarWars.csproj.GenerateResource.Cache
+H:\StarWars\StarWars\obj\x86\Release\StarWars.exe
+H:\StarWars\StarWars\obj\x86\Release\StarWars.pdb
