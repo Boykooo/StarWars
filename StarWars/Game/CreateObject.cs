@@ -109,7 +109,7 @@ namespace StarWars.Game
                 Pic[Pic.Count - 1].TypeShip = TypeShip.None;
             }
         }
-        void MovePictures(int x)
+        public void MovePictures(int x)
         {
             bool ok = false;
             for (int i = x; x < Pic.Count - 1; i++)

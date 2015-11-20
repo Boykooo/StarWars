@@ -33,6 +33,7 @@ namespace StarWars.Game
                 if (p.createObj.Pic[0].TypeShip != TypeShip.None)
                 {
                     Ship.NewShip(map, p);
+                    p.createObj.MovePictures(0);
                 }
             }
         }

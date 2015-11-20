@@ -17,6 +17,7 @@ namespace StarWars.Game
         Image ChestPicture;
         Image AsteroidPicture;
         Image DestroyerPicture;
+        Image ColonistPicture;
         Image back;
         public PaintGame(int wh, int ht)
         {
@@ -34,6 +35,7 @@ namespace StarWars.Game
             AsteroidPicture = Image.FromFile(@"Images/Asteroid.png");
             back = Image.FromFile(@"Images/Back.jpeg");
             DestroyerPicture = Image.FromFile(@"Images/Destroyer.png");
+            ColonistPicture = Image.FromFile(@"Images/Colonist.png");
         }
         void DrawGrid(Bitmap bt)
         {
@@ -79,8 +81,12 @@ namespace StarWars.Game
                                 g.DrawImage(planetPicture, new Point(i * MapStruct.BlockSize + 2, j * MapStruct.BlockSize + MapStruct.Shift + 2));
                                 break;
                             case mapObject.DestroyerYou:
-                                g.DrawRectangle(new Pen(Color.Purple, 2f), i * MapStruct.BlockSize, j * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
-                                g.DrawImage(DestroyerPicture, new Point(i * MapStruct.BlockSize + 2, j * MapStruct.BlockSize + MapStruct.Shift + 2));
+                                g.DrawRectangle(new Pen(Color.Purple, 1.5f), i * MapStruct.BlockSize, j * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
+                                g.DrawImage(DestroyerPicture, new Point(i * MapStruct.BlockSize + 4, j * MapStruct.BlockSize + MapStruct.Shift + 4));
+                                break;
+                            case mapObject.ColonistYou:
+                                g.DrawRectangle(new Pen(Color.Purple, 1.5f), i * MapStruct.BlockSize, j * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
+                                g.DrawImage(ColonistPicture, new Point(i * MapStruct.BlockSize + 4, j * MapStruct.BlockSize + MapStruct.Shift + 4));
                                 break;
                             default:
                                 break;
