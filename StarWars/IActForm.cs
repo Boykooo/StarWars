@@ -13,6 +13,7 @@ namespace StarWars
         void MouseMove(object sender, MouseEventArgs e);
         void MouseDoubleClick(object sender, MouseEventArgs e);
         Bitmap GetDefaultMap();
+        void EndTurn();
         
     }
 }

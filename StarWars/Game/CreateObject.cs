@@ -9,11 +9,12 @@ using System.Windows.Forms;
 
 namespace StarWars.Game
 {
+    public enum TypeShip { None, Destroyer, Colonist}
     public partial class CreateObject : Form
     {
-        int indexPic;
-        PictureBox colonist;
-        List<PictureBox> pic;
+        private int indexPic;
+        private PictureBox colonist;
+        public List<BuildBox> Pic {get;set;}
         public Resources Res { get; set; }
         public CreateObject(string name, int food, int titan, int irid, int gold)
         {
@@ -24,7 +25,7 @@ namespace StarWars.Game
             IridiumLabel.Text = "Иридий + " + irid;
             GoldLabel.Text = "Золото + " + gold;
             Status.Text = "";
-            pic = new List<PictureBox> { pictureBox2, pictureBox3, pictureBox4, pictureBox5, pictureBox6, pictureBox7, pictureBox8 };
+            Pic = new List<BuildBox> { new BuildBox(pictureBox2), new BuildBox(pictureBox3), new BuildBox(pictureBox4), new BuildBox(pictureBox5), new BuildBox(pictureBox6), new BuildBox(pictureBox7), new BuildBox(pictureBox8) };
             indexPic = 0;
             ColonistBox.Image = Image.FromFile(@"Images/Colonist60.png");
             DestroyerBox.Image = Image.FromFile(@"Images/Destroyer60.png");
@@ -38,11 +39,13 @@ namespace StarWars.Game
             {
                 if (Res.Food >= 15 && Res.Titanium >= 2 && Res.Gold >= 250)
                 {
-                    pic[indexPic].Image = ColonistBox.Image;
+                    Pic[indexPic].pic.Image = ColonistBox.Image;
+                    Pic[indexPic].TypeShip = TypeShip.Colonist;
                     indexPic++;
                     Res.Food -= 15;
                     Res.Titanium -= 2;
                     Res.Gold -= 250;
+                    Status.Text = "";
                 }
                 else
                     Status.Text = "Недостаточно ресурсов!";
@@ -58,11 +61,13 @@ namespace StarWars.Game
             {
                 if (Res.Iridium >= 17 && Res.Titanium >= 8 && Res.Gold >= 450)
                 {
-                    pic[indexPic].Image = DestroyerBox.Image;
+                    Pic[indexPic].pic.Image = DestroyerBox.Image;
+                    Pic[indexPic].TypeShip = TypeShip.Destroyer;
                     indexPic++;
                     Res.Iridium -= 17;
                     Res.Titanium -= 8;
                     Res.Gold -= 450;
+                    Status.Text = "";
                 }
             }
         }
@@ -99,18 +104,30 @@ namespace StarWars.Game
         private void pictureBox8_Click(object sender, EventArgs e)
         {
             if (pictureBox8.Image != null)
-                pictureBox8.Image = null;
+            {
+                Pic[Pic.Count - 1].pic.Image = null;
+                Pic[Pic.Count - 1].TypeShip = TypeShip.None;
+            }
         }
         void MovePictures(int x)
         {
             bool ok = false;
-            for (int i = x; x < pic.Count - 1; i++)
+            for (int i = x; x < Pic.Count - 1; i++)
             {
-                if (i != 6 && pic[i+1].Image != null)
-                pic[i].Image = pic[i + 1].Image;
+                if (i == x)
+                {
+                    ReturnMoney(Pic[i].TypeShip);
+                }
+                if (i != 6 && Pic[i + 1].pic.Image != null)
+                {
+                    Pic[i].pic.Image = Pic[i + 1].pic.Image;
+                    Pic[i].TypeShip = Pic[i + 1].TypeShip;
+
+                }
                 else
                 {
-                    pic[i].Image = null;
+                    Pic[i].pic.Image = null;
+                    Pic[i].TypeShip = TypeShip.None;
                     ok = true;
                     break;
                 }
@@ -119,6 +136,32 @@ namespace StarWars.Game
             {
                 indexPic--;
             }
+        }
+        void ReturnMoney(TypeShip ship)
+        {
+            switch(ship)
+            {
+                case TypeShip.Colonist:
+                    Res.Food += 15;
+                    Res.Titanium += 2;
+                    Res.Gold += 250;
+                    break;
+                case TypeShip.Destroyer:
+                    Res.Titanium += 8;
+                    Res.Iridium += 17;
+                    Res.Gold += 450;
+                    break;
+            }
+        }
+    }
+    public class BuildBox
+    {
+        public PictureBox pic { get; set; }
+        public TypeShip TypeShip { get; set; }
+        public BuildBox(PictureBox pictureBox)
+        {
+            pic = pictureBox;
+            TypeShip = Game.TypeShip.None;
         }
     }
 }

@@ -11,5 +11,6 @@ namespace StarWars
         Size sizeForm { get; set; }
         void Invalidate(Bitmap bt);
         void ChangeResources(int food, int titanium, int iridium, int gold);
+        void Status(string status);
     }
 }

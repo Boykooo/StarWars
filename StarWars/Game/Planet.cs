@@ -8,10 +8,10 @@ namespace StarWars.Game
 {
     public class Planet : Resources
     {
-        string name;
-        Point location;
-        Civilization civ;
-        CreateObject createObj;
+        private string name;
+        public Point Location { get; set; }
+        private Civilization civ;
+        public CreateObject createObj { get; set; }
         public Planet (Point location, string name, int food, int titanium, int iridium, int gold)
         {
             Food = food;
@@ -19,7 +19,7 @@ namespace StarWars.Game
             Iridium = iridium;
             Gold = gold;
             this.name = name;
-            this.location = location;
+            this.Location = location;
         }
         public void ChangeCiv(Civilization civ)
         {

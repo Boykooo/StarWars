@@ -16,6 +16,7 @@ namespace StarWars.Game
         Image planetPicture;
         Image ChestPicture;
         Image AsteroidPicture;
+        Image DestroyerPicture;
         Image back;
         public PaintGame(int wh, int ht)
         {
@@ -32,6 +33,7 @@ namespace StarWars.Game
             ChestPicture = Image.FromFile(@"Images/Chest.png");
             AsteroidPicture = Image.FromFile(@"Images/Asteroid.png");
             back = Image.FromFile(@"Images/Back.jpeg");
+            DestroyerPicture = Image.FromFile(@"Images/Destroyer.png");
         }
         void DrawGrid(Bitmap bt)
         {
@@ -75,6 +77,10 @@ namespace StarWars.Game
                             case mapObject.PlanetEnemy:
                                 g.DrawRectangle(penEnemy, i * MapStruct.BlockSize, j * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
                                 g.DrawImage(planetPicture, new Point(i * MapStruct.BlockSize + 2, j * MapStruct.BlockSize + MapStruct.Shift + 2));
+                                break;
+                            case mapObject.DestroyerYou:
+                                g.DrawRectangle(new Pen(Color.Purple, 2f), i * MapStruct.BlockSize, j * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
+                                g.DrawImage(DestroyerPicture, new Point(i * MapStruct.BlockSize + 2, j * MapStruct.BlockSize + MapStruct.Shift + 2));
                                 break;
                             default:
                                 break;

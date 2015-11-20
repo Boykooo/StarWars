@@ -8,12 +8,12 @@ namespace StarWars.Game
 {
     class GameLogic
     {
-        Civilization you;
+        public Civilization You { get; set; }
         Civilization enemy;
         Dictionary<Point, Planet> planets;
         public GameLogic(mapObject[,] map)
         {
-            you = new Civilization();
+            You = new Civilization();
             enemy = new Civilization();
             planets = new Dictionary<Point, Planet>();
             InitPlanets(map);
@@ -35,9 +35,15 @@ namespace StarWars.Game
         public void ChangeCivOnPlanet(Point loc, nameCiv civ)
         {
             if (civ == nameCiv.You)
-                planets[loc].ChangeCiv(you);
+            {
+                planets[loc].ChangeCiv(You);
+                You.planets.Add(planets[loc]);
+            }
             else
+            {
                 planets[loc].ChangeCiv(enemy);
+                enemy.planets.Add(planets[loc]);
+            }
         }
         public void ShowBuildForm(Point loc)
         {
@@ -45,6 +51,11 @@ namespace StarWars.Game
             {
                 planets[loc].BuildObj();
             }
+        }
+        public void EndTurn(mapObject[,] map)
+        {
+            You.BuildShip(map); // строим корабли
+            You.CollectResources(); // сбор ресурсов
         }
     }
 }

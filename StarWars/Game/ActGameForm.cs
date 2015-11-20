@@ -9,7 +9,7 @@ namespace StarWars.Game
 {
     class ActGameForm : IActForm
     {
-        bool selectCapital;
+        bool selectCapital, firstShip;
         IForm form;
         PaintGame draw;
         MapStruct map;
@@ -20,7 +20,7 @@ namespace StarWars.Game
             map.InitMap();
             form = formGame;
             draw = new PaintGame(form.sizeForm.Width, form.sizeForm.Height);
-            selectCapital = true;
+            selectCapital = firstShip = true;
             game = new GameLogic(map.MapObject);
         }
         public Bitmap GetDefaultMap()
@@ -35,13 +35,10 @@ namespace StarWars.Game
                 if (selectCapital)
                 {
                     SelectCapitalPlanet(location);
+                    form.Status("Постройте первый корабль!");
                 }
                 else
                 {
-                    if (map.MapObject[location.X, location.Y] == mapObject.Ship)
-                    {
-
-                    }
                 }
             }
         }
@@ -63,7 +60,17 @@ namespace StarWars.Game
         {
             var location = new Point(e.X / MapStruct.BlockSize, (e.Y - MapStruct.Shift) / MapStruct.BlockSize);
             if (map.MapObject[location.X, location.Y] == mapObject.PlanetYou)
+            {
                 game.ShowBuildForm(location);
+                if(firstShip)
+                    form.Status("Завоюйте галактику!");
+            }
+        }
+        public void EndTurn()
+        {
+            game.EndTurn(map.MapObject);
+            form.Invalidate(draw.GetMap(map.MapObject));
+            form.ChangeResources(game.You.Food, game.You.Titanium, game.You.Iridium, game.You.Gold);
         }
     }
 }

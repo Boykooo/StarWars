@@ -47,7 +47,7 @@ namespace StarWars.Game
         }
         private void EndTurn_Click(object sender, EventArgs e)
         {
-
+            act.EndTurn();
         }
         private void GameForm_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -59,6 +59,10 @@ namespace StarWars.Game
             TitaniumLabel.Text = titanium.ToString();
             IridiumLabel.Text = iridium.ToString();
             GoldLabel.Text = gold.ToString();
+        }
+        public void Status(string status)
+        {
+            StatusGame.Text = status;
         }
     }
 }

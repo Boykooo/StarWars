@@ -6,8 +6,7 @@ using StarWars.Game;
 
 namespace StarWars
 {
-    public enum mapObject { None, Planet, Chest, Asteroid, PlanetYou, PlanetEnemy, Ship}
-    public enum Ship { Colonist, Destroyer}
+    public enum mapObject { None, Planet, Chest, Asteroid, PlanetYou, PlanetEnemy, ColonistYou, ColonistEnemy, DestroyerYou, DestroyerEnemy }
     public enum nameCiv { You, Enemy }
     static class Program
     {

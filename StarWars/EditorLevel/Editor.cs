@@ -75,16 +75,20 @@ namespace StarWars.EditorLevel
                 //    act.MouseMove(sender, e, mapObject.Asteroid, GridCheck.Checked);
                 //}
         }
-
         private void GridCheck_CheckStateChanged(object sender, EventArgs e)
         {
             pictureBox1.Image = act.GetPicture(GridCheck.Checked);
         }
-
         public Size sizeForm { get; set; }
-
-
         public void ChangeResources(int food, int titanium, int iridium, int gold)
+        {
+            throw new NotImplementedException();
+        }
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+        public void Status(string status)
         {
             throw new NotImplementedException();
         }
