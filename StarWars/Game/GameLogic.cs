@@ -37,12 +37,12 @@ namespace StarWars.Game
             if (civ == nameCiv.You)
             {
                 planets[loc].ChangeCiv(You, act);
-                You.planets.Add(planets[loc]);
+                You.Planets.Add(planets[loc]);
             }
             else
             {
                 planets[loc].ChangeCiv(enemy, act);
-                enemy.planets.Add(planets[loc]);
+                enemy.Planets.Add(planets[loc]);
             }
         }
         public void ShowBuildForm(Point loc)
@@ -55,7 +55,12 @@ namespace StarWars.Game
         public void EndTurn(mapObject[,] map)
         {
             You.BuildShip(map); // строим корабли
+            You.ClearTurnShips(); // Даем корабликам ходить снова
             You.CollectResources(); // сбор ресурсов
+        }
+        public void MoveShip(Point old, Point now)
+        {
+            You.MoveShip(old, now);
         }
     }
 }

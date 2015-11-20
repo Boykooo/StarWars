@@ -6,8 +6,13 @@ using System.Text;
 
 namespace StarWars.Game
 {
-    class Ship 
+    public class Ship 
     {
+        public bool Turn { get; set; }
+        public Ship()
+        {
+            Turn = false;
+        }
         public static Point SearchFreePlace(mapObject[,] map, Point planet)
         {
             Point[] tmp = new Point[]
@@ -33,18 +38,6 @@ namespace StarWars.Game
             }
             return tmp[0];
         }
-        public static void NewShip(mapObject[,] map, Planet p)
-        {
-                Point newShip = Ship.SearchFreePlace(map, p.Location);
-                switch (p.createObj.Pic[0].TypeShip)
-                {
-                    case TypeShip.Colonist:
-                        map[newShip.X, newShip.Y] = mapObject.ColonistYou;
-                        break;
-                    case TypeShip.Destroyer:
-                        map[newShip.X, newShip.Y] = mapObject.DestroyerYou;
-                        break;
-                }
-        }
+        
     }
 }
