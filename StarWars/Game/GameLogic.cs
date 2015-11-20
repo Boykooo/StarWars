@@ -28,20 +28,20 @@ namespace StarWars.Game
                 for (int j = 0; j < map.GetLength(1); j++)
                 {
                     if (map[i,j] == mapObject.Planet)
-                        planets.Add(new Point(i, j), new Planet(new Point(i, j), temp[indexName++], r.Next(2, 7), r.Next(3, 6), r.Next(6,12), r.Next(50, 400)));
+                        planets.Add(new Point(i, j), new Planet(new Point(i, j), temp[indexName++], r.Next(2, 7), r.Next(2, 4), r.Next(1,5), r.Next(50, 200)));
                 }
             }
         }
-        public void ChangeCivOnPlanet(Point loc, nameCiv civ)
+        public void ChangeCivOnPlanet(Point loc, nameCiv civ, IActForm act)
         {
             if (civ == nameCiv.You)
             {
-                planets[loc].ChangeCiv(You);
+                planets[loc].ChangeCiv(You, act);
                 You.planets.Add(planets[loc]);
             }
             else
             {
-                planets[loc].ChangeCiv(enemy);
+                planets[loc].ChangeCiv(enemy, act);
                 enemy.planets.Add(planets[loc]);
             }
         }

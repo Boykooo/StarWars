@@ -66,7 +66,7 @@
             // 
             // ColonistBox
             // 
-            this.ColonistBox.Location = new System.Drawing.Point(95, 16);
+            this.ColonistBox.Location = new System.Drawing.Point(98, 16);
             this.ColonistBox.Name = "ColonistBox";
             this.ColonistBox.Size = new System.Drawing.Size(60, 60);
             this.ColonistBox.TabIndex = 0;
@@ -184,9 +184,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(8, 44);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 16);
+            this.label2.Size = new System.Drawing.Size(68, 16);
             this.label2.TabIndex = 11;
-            this.label2.Text = "Титан: 2";
+            this.label2.Text = "Титан: 20";
             // 
             // label3
             // 
@@ -194,9 +194,9 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(8, 60);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 16);
+            this.label3.Size = new System.Drawing.Size(90, 16);
             this.label3.TabIndex = 12;
-            this.label3.Text = "Золото: 250";
+            this.label3.Text = "Золото: 1250";
             // 
             // label4
             // 
@@ -206,7 +206,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 16);
             this.label4.TabIndex = 13;
-            this.label4.Text = "Еда: 15";
+            this.label4.Text = "Еда: 80";
             // 
             // label6
             // 

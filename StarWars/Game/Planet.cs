@@ -21,10 +21,11 @@ namespace StarWars.Game
             this.name = name;
             this.Location = location;
         }
-        public void ChangeCiv(Civilization civ)
+        public void ChangeCiv(Civilization civ, IActForm act)
         {
             this.civ = civ;
-            createObj = new CreateObject(name, Food, Titanium, Iridium, Gold);
+            createObj = new CreateObject(name, Food, Titanium, Iridium, Gold, act);
+            
         }
         public void BuildObj()
         {

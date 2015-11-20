@@ -14,7 +14,7 @@ namespace StarWars.Game
         PaintGame draw;
         MapStruct map;
         GameLogic game;
-        public ActGameForm(IForm formGame)
+        public ActGameForm(IForm formGame)  
         {
             map = new MapStruct();
             map.InitMap();
@@ -46,7 +46,7 @@ namespace StarWars.Game
         {
             if (map.MapObject[location.X, location.Y] == mapObject.Planet)
             {
-                game.ChangeCivOnPlanet(location, nameCiv.You);
+                game.ChangeCivOnPlanet(location, nameCiv.You, this);
                 map.MapObject[location.X, location.Y] = mapObject.PlanetYou;
                 selectCapital = false;
                 form.Invalidate(draw.GetMap(map.MapObject));
@@ -71,6 +71,10 @@ namespace StarWars.Game
             game.EndTurn(map.MapObject);
             form.Invalidate(draw.GetMap(map.MapObject));
             form.ChangeResources(game.You.Food, game.You.Titanium, game.You.Iridium, game.You.Gold);
+        }
+        public void ReResources(int food, int titanium, int iridium, int gold)
+        {
+            form.ChangeResources(food, titanium, iridium, gold);
         }
     }
 }

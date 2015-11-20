@@ -7,13 +7,13 @@ using System.Drawing;
 
 namespace StarWars
 {
-    interface IActForm
+    public interface IActForm
     {
         void MouseClick(object sender, MouseEventArgs e);
         void MouseMove(object sender, MouseEventArgs e);
         void MouseDoubleClick(object sender, MouseEventArgs e);
         Bitmap GetDefaultMap();
         void EndTurn();
-        
+        void ReResources(int food, int titanium, int iridium, int gold);
     }
 }
