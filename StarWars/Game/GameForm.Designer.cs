@@ -170,6 +170,7 @@
             this.Name = "GameForm";
             this.Text = "NewGameForm";
             this.Load += new System.EventHandler(this.NewGameForm_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.GameForm_KeyPress);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GameForm_MouseClick);
             this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.GameForm_MouseDoubleClick);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GameForm_MouseMove);

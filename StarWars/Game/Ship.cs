@@ -38,6 +38,5 @@ namespace StarWars.Game
             }
             return tmp[0];
         }
-        
     }
 }

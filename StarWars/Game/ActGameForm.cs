@@ -46,7 +46,7 @@ namespace StarWars.Game
                     {
                         if ((map.MapObject[location.X, location.Y] == mapObject.DestroyerYou || map.MapObject[location.X, location.Y] == mapObject.ColonistYou) && game.You.Ships.ContainsKey(location) && !game.You.Ships[location].Turn)
                         {
-                            form.Invalidate(draw.GetShipRegion(map.MapObject, location));
+                            form.Invalidate(draw.GetShipRegion(map.MapObject, location, map.MapObject[location.X, location.Y] == mapObject.ColonistYou));
                             pointShip = location;
                         }
                         else
@@ -60,10 +60,13 @@ namespace StarWars.Game
                     if (game.You.Ships.ContainsKey(pointShip) && !game.You.Ships[pointShip].Turn)
                     {
                         MoveShip(pointShip, location);
-                        game.You.Ships[pointShip].Turn = draw.MovingShip;
-                        if (draw.MovingShip)
+                        if (game.You.Ships.Keys.Contains(pointShip))
                         {
-                            game.MoveShip(pointShip, location);
+                            game.You.Ships[pointShip].Turn = draw.MovingShip;
+                            if (draw.MovingShip)
+                            {
+                                game.MoveShip(pointShip, location);
+                            }
                         }
                     }
                 }
@@ -108,7 +111,6 @@ namespace StarWars.Game
                     break;
                 case mapObject.Asteroid:
                     draw.MovingShip = false;
-                    form.Invalidate(draw.MainBt);
                     break;
                 case mapObject.DestroyerEnemy:
                     break;
@@ -121,15 +123,21 @@ namespace StarWars.Game
                     draw.MovingShip = false;
                     break;
                 case mapObject.Planet:
+                    if (map.MapObject[start.X, start.Y] == mapObject.ColonistYou)
+                    {
+                        game.ChangeCivOnPlanet(end, nameCiv.You, this, map.MapObject, start);
+                        form.Invalidate(draw.GetMap(map.MapObject));
+                    }
+                    break;
+                default:
                     draw.MovingShip = false;
                     break;
-
             }
         }
         private string RandomChest()
         {
             int x = r.Next(1, 5);
-            int bonus = r.Next(5,16);
+            int bonus = r.Next(5, 16);
             string b = "";
             switch (x)
             {
@@ -157,12 +165,11 @@ namespace StarWars.Game
         {
             if (map.MapObject[location.X, location.Y] == mapObject.Planet)
             {
-                game.ChangeCivOnPlanet(location, nameCiv.You, this);
+                game.ChangeCivOnPlanet(location, nameCiv.You, this, map.MapObject, new Point(-1,-1));
                 map.MapObject[location.X, location.Y] = mapObject.PlanetYou;
                 selectCapital = false;
                 form.Invalidate(draw.GetMap(map.MapObject));
             }
         }
-
     }
 }

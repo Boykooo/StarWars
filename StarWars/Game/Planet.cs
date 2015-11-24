@@ -25,7 +25,6 @@ namespace StarWars.Game
         {
             this.civ = civ;
             createObj = new CreateObject(name, Food, Titanium, Iridium, Gold, act);
-            
         }
         public void BuildObj()
         {

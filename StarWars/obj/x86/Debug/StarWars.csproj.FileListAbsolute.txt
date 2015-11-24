@@ -35,7 +35,6 @@ H:\StarWars\StarWars\obj\x86\Debug\StarWars.Game.CreateObject.resources
 C:\Users\Андрей\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.pdb
 C:\Users\Андрей\Desktop\StarWars\StarWars\bin\Debug\StarWars.exe
 C:\Users\Андрей\Desktop\StarWars\StarWars\bin\Debug\StarWars.pdb
-C:\Users\Андрей\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.csprojResolveAssemblyReference.cache
 C:\Users\Андрей\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.EditorLevel.Editor.resources
 C:\Users\Андрей\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.EditorLevel.SaveMap.resources
 C:\Users\Андрей\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.Game.CreateObject.resources
@@ -44,3 +43,4 @@ C:\Users\Андрей\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.StartForm
 C:\Users\Андрей\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.Properties.Resources.resources
 C:\Users\Андрей\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.csproj.GenerateResource.Cache
 C:\Users\Андрей\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.exe
+C:\Users\Андрей\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.csprojResolveAssemblyReference.cache

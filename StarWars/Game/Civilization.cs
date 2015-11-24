@@ -66,5 +66,14 @@ namespace StarWars.Game
             Ships.Add(now, Ships[old]);
             Ships.Remove(old);
         }
+        public void AddPlanet(Planet planet)
+        {
+            Planets.Add(planet);
+        }
+        public void DeleteShip(Point loc)
+        {
+            if (Ships.Keys.Contains(loc))
+                Ships.Remove(loc);
+        }
     }
 }

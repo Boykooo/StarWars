@@ -14,6 +14,7 @@ namespace StarWars.Game
         private Pen penEnemy;
         private Pen penYou;
         private Pen penChest;
+        private Pen penPlanet;
         private Bitmap tempBt;
         private Image planetPicture;
         private Image ChestPicture;
@@ -28,6 +29,7 @@ namespace StarWars.Game
             penEnemy = new Pen(Color.Red, 1.5f);
             penYou = new Pen(Color.Purple, 3f);
             penChest = new Pen(Color.Yellow, 1.5f);
+            penPlanet = new Pen(Color.AliceBlue, 1.5f);
             MainBt = new Bitmap(wh, ht);
             tempBt = new Bitmap(wh, ht);
             InitPicture();
@@ -100,7 +102,7 @@ namespace StarWars.Game
                 return MainBt;
             }
         }
-        public Bitmap GetShipRegion(mapObject[,] map, Point location)
+        public Bitmap GetShipRegion(mapObject[,] map, Point location, bool colonist)
         {
             using (Graphics g = Graphics.FromImage(tempBt))
             {
@@ -122,6 +124,8 @@ namespace StarWars.Game
                         g.DrawRectangle(penEnemy, p.X * MapStruct.BlockSize, p.Y * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
                     if (map[p.X, p.Y] == mapObject.ColonistEnemy)
                         g.DrawRectangle(penEnemy, p.X * MapStruct.BlockSize, p.Y * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
+                    if (map[p.X, p.Y] == mapObject.PlanetEnemy)
+                        g.DrawRectangle(penEnemy, p.X * MapStruct.BlockSize, p.Y * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
                 }
                 // область самого корабля
                 g.DrawRectangle(new Pen(Color.Purple, 1.0f), location.X * MapStruct.BlockSize, location.Y * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
@@ -129,7 +133,15 @@ namespace StarWars.Game
                 foreach (var p in temp)
                 {
                     if (map[p.X, p.Y] == mapObject.Chest)
-                        g.DrawRectangle(new Pen(Color.Yellow, 1.8f), p.X * MapStruct.BlockSize, p.Y * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
+                        g.DrawRectangle(penChest, p.X * MapStruct.BlockSize, p.Y * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
+                }
+                if (colonist)
+                {
+                    foreach (var p in temp)
+                    {
+                        if (map[p.X, p.Y] == mapObject.Planet)
+                            g.DrawRectangle(penPlanet, p.X * MapStruct.BlockSize, p.Y * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
+                    }
                 }
                 return tempBt;
             }

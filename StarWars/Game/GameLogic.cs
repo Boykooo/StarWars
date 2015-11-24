@@ -9,8 +9,8 @@ namespace StarWars.Game
     class GameLogic
     {
         public Civilization You { get; set; }
-        Civilization enemy;
-        Dictionary<Point, Planet> planets;
+        private Civilization enemy;
+        private Dictionary<Point, Planet> planets;
         public GameLogic(mapObject[,] map)
         {
             You = new Civilization();
@@ -28,21 +28,33 @@ namespace StarWars.Game
                 for (int j = 0; j < map.GetLength(1); j++)
                 {
                     if (map[i,j] == mapObject.Planet)
-                        planets.Add(new Point(i, j), new Planet(new Point(i, j), temp[indexName++], r.Next(2, 7), r.Next(2, 4), r.Next(1,5), r.Next(50, 200)));
+                        planets.Add(new Point(i, j), new Planet(new Point(i, j), temp[indexName++], r.Next(2, 7), r.Next(2, 4), r.Next(1,5), r.Next(50, 100)));
                 }
             }
         }
-        public void ChangeCivOnPlanet(Point loc, nameCiv civ, IActForm act)
+        public void ChangeCivOnPlanet(Point locPlanet, nameCiv civ, IActForm act,mapObject[,] map,  Point ship)
         {
             if (civ == nameCiv.You)
             {
-                planets[loc].ChangeCiv(You, act);
-                You.Planets.Add(planets[loc]);
+                planets[locPlanet].ChangeCiv(You, act);
+                You.AddPlanet(planets[locPlanet]);
+                map[locPlanet.X, locPlanet.Y] = mapObject.PlanetYou;
+                if (ship.X != -1)
+                {
+                    You.DeleteShip(ship);
+                    map[ship.X, ship.Y] = mapObject.None;
+                }
             }
             else
             {
-                planets[loc].ChangeCiv(enemy, act);
-                enemy.Planets.Add(planets[loc]);
+                planets[locPlanet].ChangeCiv(enemy, act);
+                enemy.AddPlanet(planets[locPlanet]);
+                map[locPlanet.X, locPlanet.Y] = mapObject.PlanetEnemy;
+                if (ship.X != -1)
+                {
+                    enemy.DeleteShip(ship);
+                    map[ship.X, ship.Y] = mapObject.None;
+                }
             }
         }
         public void ShowBuildForm(Point loc)

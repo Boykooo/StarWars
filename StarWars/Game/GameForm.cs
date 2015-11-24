@@ -64,5 +64,13 @@ namespace StarWars.Game
         {
             StatusGame.Text = status;
         }
+
+        private void GameForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                act.EndTurn();
+            }
+        }
     }
 }
