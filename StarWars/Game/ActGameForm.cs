@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace StarWars.Game
 {
-    class ActGameForm : IActForm
+    public class ActGameForm : IActForm
     {
         private bool selectCapital, firstShip;
         private IForm form;
@@ -41,6 +41,7 @@ namespace StarWars.Game
                     {
                         SelectCapitalPlanet(location);
                         form.Status("Постройте первый корабль!");
+                        game.SelectEnemyCapital(location, nameCiv.You, this, map.MapObject, new Point(-1, -1));
                     }
                     else
                     {
@@ -97,7 +98,7 @@ namespace StarWars.Game
         {
             form.ChangeResources(food, titanium, iridium, gold);
         }
-        void MoveShip(Point start, Point end)
+        public void MoveShip(Point start, Point end)
         {
             switch (map.MapObject[end.X, end.Y])
             {
@@ -161,7 +162,7 @@ namespace StarWars.Game
             }
             return b;
         }
-        void SelectCapitalPlanet(Point location)
+        private void SelectCapitalPlanet(Point location)
         {
             if (map.MapObject[location.X, location.Y] == mapObject.Planet)
             {
@@ -170,6 +171,12 @@ namespace StarWars.Game
                 selectCapital = false;
                 form.Invalidate(draw.GetMap(map.MapObject));
             }
+        }
+        private void SelectEnemyPlanet(Point location)
+        {
+            game.ChangeCivOnPlanet(location, nameCiv.Enemy, this, map.MapObject, new Point(-1, -1));
+            map.MapObject[location.X, location.Y] = mapObject.PlanetEnemy;
+            form.Invalidate(draw.GetMap(map.MapObject));
         }
     }
 }

@@ -44,3 +44,16 @@ C:\Users\Андрей\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.Propertie
 C:\Users\Андрей\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.csproj.GenerateResource.Cache
 C:\Users\Андрей\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.exe
 C:\Users\Андрей\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.csprojResolveAssemblyReference.cache
+\\csfs\home$\bojcov_a_a\Profile\Desktop\StarWars\StarWars\bin\Debug\StarWars.exe
+\\csfs\home$\bojcov_a_a\Profile\Desktop\StarWars\StarWars\bin\Debug\StarWars.pdb
+\\csfs\home$\bojcov_a_a\Profile\Desktop\StarWars\StarWars\obj\x86\Debug\ResolveAssemblyReference.cache
+\\csfs\home$\bojcov_a_a\Profile\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.EditorLevel.Editor.resources
+\\csfs\home$\bojcov_a_a\Profile\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.EditorLevel.SaveMap.resources
+\\csfs\home$\bojcov_a_a\Profile\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.Game.CreateObject.resources
+\\csfs\home$\bojcov_a_a\Profile\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.Game.GameForm.resources
+\\csfs\home$\bojcov_a_a\Profile\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.StartForm.resources
+\\csfs\home$\bojcov_a_a\Profile\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.Properties.Resources.resources
+\\csfs\home$\bojcov_a_a\Profile\Desktop\StarWars\StarWars\obj\x86\Debug\GenerateResource.read.1.tlog
+\\csfs\home$\bojcov_a_a\Profile\Desktop\StarWars\StarWars\obj\x86\Debug\GenerateResource.write.1.tlog
+\\csfs\home$\bojcov_a_a\Profile\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.exe
+\\csfs\home$\bojcov_a_a\Profile\Desktop\StarWars\StarWars\obj\x86\Debug\StarWars.pdb

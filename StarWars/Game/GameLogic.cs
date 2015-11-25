@@ -6,7 +6,7 @@ using System.Text;
 
 namespace StarWars.Game
 {
-    class GameLogic
+    public class GameLogic
     {
         public Civilization You { get; set; }
         private Civilization enemy;
@@ -18,7 +18,7 @@ namespace StarWars.Game
             planets = new Dictionary<Point, Planet>();
             InitPlanets(map);
         }
-        void InitPlanets(mapObject[,] map)
+        private void InitPlanets(mapObject[,] map)
         {
             List<string> temp = new List<string> { "Ферос", "Иден Прайм", "Мавигон", "Тучанка","Палавен","Сур'Кеш","Сильва","Солярис","Сион","Велес","Элата"};
             int indexName = 0;
@@ -47,7 +47,7 @@ namespace StarWars.Game
             }
             else
             {
-                planets[locPlanet].ChangeCiv(enemy, act);
+                planets[locPlanet].ChangeCiv(enemy);
                 enemy.AddPlanet(planets[locPlanet]);
                 map[locPlanet.X, locPlanet.Y] = mapObject.PlanetEnemy;
                 if (ship.X != -1)
@@ -66,13 +66,31 @@ namespace StarWars.Game
         }
         public void EndTurn(mapObject[,] map)
         {
-            You.BuildShip(map); // строим корабли
-            You.ClearTurnShips(); // Даем корабликам ходить снова
-            You.CollectResources(); // сбор ресурсов
+            You.EndTurn(map);
+            TurnEnemy();
+            enemy.EndTurn(map);
         }
         public void MoveShip(Point old, Point now)
         {
             You.MoveShip(old, now);
+        }
+        public void SelectEnemyCapital(Point locPlanet, nameCiv civ, IActForm act, mapObject[,] map, Point ship)
+        {
+            Random r = new Random();
+            foreach (var p in planets.Keys)
+            {
+                if (planets[p].civ == null)
+                {
+                    planets[p].ChangeCiv(enemy);
+                    enemy.AddPlanet(planets[p]);
+                    ChangeCivOnPlanet(new Point(p.X,p.Y), nameCiv.Enemy, act, map, ship);
+                    break;
+                }
+            }
+        }
+        private void TurnEnemy()
+        {
+            
         }
     }
 }

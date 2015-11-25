@@ -26,7 +26,7 @@ namespace StarWars.Game
         public PaintGame(int wh, int ht)
         {
             penGreen = new Pen(Color.Green, 1.5f);
-            penEnemy = new Pen(Color.Red, 1.5f);
+            penEnemy = new Pen(Color.Red, 2f);
             penYou = new Pen(Color.Purple, 3f);
             penChest = new Pen(Color.Yellow, 1.5f);
             penPlanet = new Pen(Color.AliceBlue, 1.5f);
@@ -171,7 +171,7 @@ namespace StarWars.Game
             }
             return availableArea;
         }
-        void DrawRegionObj(Graphics g, Pen pen, Point[] reg, mapObject Obj, mapObject[,] map)
+        private void DrawRegionObj(Graphics g, Pen pen, Point[] reg, mapObject Obj, mapObject[,] map)
         {
             // Пусто
             foreach (var p in reg)

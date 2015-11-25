@@ -35,6 +35,23 @@ namespace StarWars.Game
             colonist.Size = ColonistBox.Size;
             this.act = act;
         }
+        public CreateObject(string name, int food, int titan, int irid, int gold)
+        {
+            InitializeComponent();
+            NamePlanet.Text = name;
+            FoodLabel.Text = "Еда + " + food;
+            TitaniumLabel.Text = "Титан + " + titan;
+            IridiumLabel.Text = "Иридий + " + irid;
+            GoldLabel.Text = "Золото + " + gold;
+            Status.Text = "";
+            Pic = new List<BuildBox> { new BuildBox(pictureBox2), new BuildBox(pictureBox3), new BuildBox(pictureBox4), new BuildBox(pictureBox5), new BuildBox(pictureBox6), new BuildBox(pictureBox7), new BuildBox(pictureBox8) };
+            indexPic = 0;
+            ColonistBox.Image = Image.FromFile(@"Images/Colonist60.png");
+            DestroyerBox.Image = Image.FromFile(@"Images/Destroyer60.png");
+            colonist = new PictureBox();
+            colonist.Image = ColonistBox.Image;
+            colonist.Size = ColonistBox.Size;
+        }
         private void ColonistBox_MouseClick(object sender, MouseEventArgs e)
         {
             if (indexPic < 7)
@@ -140,6 +157,7 @@ namespace StarWars.Game
             {
                 indexPic--;
             }
+            act.ReResources(Res.Food, Res.Titanium, Res.Iridium, Res.Gold);
         }
         void ReturnMoney(TypeShip ship)
         {

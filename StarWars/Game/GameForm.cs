@@ -11,8 +11,8 @@ namespace StarWars.Game
 {
     public partial class GameForm : Form, IForm
     {
-        IActForm act;
-        Graphics g;
+        private IActForm act;
+        private Graphics g;
         public Size sizeForm { get; set; }
         public GameForm()
         {
@@ -64,7 +64,6 @@ namespace StarWars.Game
         {
             StatusGame.Text = status;
         }
-
         private void GameForm_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)

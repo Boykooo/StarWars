@@ -75,5 +75,11 @@ namespace StarWars.Game
             if (Ships.Keys.Contains(loc))
                 Ships.Remove(loc);
         }
+        public void EndTurn(mapObject[,] map)
+        {
+            BuildShip(map); // строим корабли
+            ClearTurnShips(); // Даем корабликам ходить снова
+            CollectResources(); // сбор ресурсов
+        }
     }
 }

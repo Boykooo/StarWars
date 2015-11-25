@@ -117,7 +117,7 @@
             this.EndTurn.Name = "EndTurn";
             this.EndTurn.Size = new System.Drawing.Size(99, 30);
             this.EndTurn.TabIndex = 9;
-            this.EndTurn.Text = "Turn";
+            this.EndTurn.Text = "Turn(enter)";
             this.EndTurn.UseVisualStyleBackColor = true;
             this.EndTurn.Click += new System.EventHandler(this.EndTurn_Click);
             // 

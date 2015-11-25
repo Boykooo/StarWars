@@ -6,7 +6,7 @@ using System.Text;
 
 namespace StarWars
 {
-    interface IForm
+    public interface IForm
     {
         Size sizeForm { get; set; }
         void Invalidate(Bitmap bt);
