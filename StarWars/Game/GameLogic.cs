@@ -115,9 +115,6 @@ namespace StarWars.Game
                     form.Status(RandomChest());
                     form.ChangeResources(You.Food, You.Titanium, You.Iridium, You.Gold);
                     break;
-                case mapObject.Asteroid:
-                    draw.MovingShip = false;
-                    break;
                 case mapObject.DestroyerEnemy:
                     if (map[start.X, start.Y] == mapObject.DestroyerYou)
                     {
