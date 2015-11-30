@@ -84,19 +84,24 @@ namespace StarWars.Game
             {
                 if (planets[p].civ == null)
                 {
-                    planets[p].ChangeCiv(enemy);
-                    enemy.AddPlanet(planets[p]);
+                    //planets[p].ChangeCiv(enemy);
+                    //enemy.AddPlanet(planets[p]);
                     ChangeCivOnPlanet(new Point(p.X, p.Y), nameCiv.Enemy, act, map, ship);
                     break;
                 }
             }
         }
-        public void KillEnemyShip(Point ship)
+        private void KillEnemyShip(Point ship)
         {
             if (enemy.Ships.ContainsKey(ship))
             {
                 enemy.Ships.Remove(ship);
             }
+        }
+        private void ClearPlanet(Point pointPlanet)
+        {
+            planets[pointPlanet].civ = null;
+            enemy.Planets.Remove(planets[pointPlanet]);
         }
         public void MoveShip(Point start, Point end, mapObject[,] map, IForm form, PaintGame draw, IActForm actForm)
         {
@@ -131,10 +136,14 @@ namespace StarWars.Game
                         draw.MovingShip = false;
                     }
                     break;
-                case mapObject.PlanetYou:
-                    draw.MovingShip = false;
-                    break;
                 case mapObject.PlanetEnemy:
+                    if (map[start.X, start.Y] == mapObject.DestroyerYou)
+                    {
+                        map[end.X, end.Y] = mapObject.Planet;
+                        ClearPlanet(end);
+                        form.Invalidate(draw.GetMap(map));
+                        draw.MovingShip = false;
+                    }
                     draw.MovingShip = false;
                     break;
                 case mapObject.Planet:
@@ -145,6 +154,7 @@ namespace StarWars.Game
                     }
                     break;
                 default:
+                    draw.MovingShip = false;
                     break;
             }
         }
@@ -174,6 +184,14 @@ namespace StarWars.Game
                     break;
             }
             return b;
+        }
+        public bool CheckWin()
+        {
+            return enemy.Ships.Count == 0 && enemy.Planets.Count == 0;
+        }
+        public bool CheckDefeat()
+        {
+            return You.Ships.Count == 0 && You.Planets.Count == 0;
         }
     }
 }

@@ -15,7 +15,6 @@ namespace StarWars.Game
         private MapStruct map;
         private GameLogic game;
         private Point pointShip;
-        private Random r;
         public ActGameForm(IForm formGame)
         {
             map = new MapStruct();
@@ -24,7 +23,6 @@ namespace StarWars.Game
             draw = new PaintGame(form.sizeForm.Width, form.sizeForm.Height);
             selectCapital = firstShip = true;
             game = new GameLogic(map.MapObject);
-            r = new Random();
         }
         public Bitmap GetDefaultMap()
         {
@@ -89,10 +87,11 @@ namespace StarWars.Game
         }
         public void EndTurn()
         {
-            form.Status("");
-            game.EndTurn(map.MapObject);
-            form.Invalidate(draw.GetMap(map.MapObject));
-            form.ChangeResources(game.You.Food, game.You.Titanium, game.You.Iridium, game.You.Gold);
+           
+                game.EndTurn(map.MapObject);
+                form.Invalidate(draw.GetMap(map.MapObject));
+                form.ChangeResources(game.You.Food, game.You.Titanium, game.You.Iridium, game.You.Gold);
+            
         }
         public void ReResources(int food, int titanium, int iridium, int gold)
         {
