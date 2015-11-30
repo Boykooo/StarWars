@@ -152,6 +152,8 @@ namespace StarWars.Game
                         ChangeCivOnPlanet(end, nameCiv.You, actForm, map, start);
                         form.Invalidate(draw.GetMap(map));
                     }
+                    else
+                        draw.MovingShip = false;
                     break;
                 default:
                     draw.MovingShip = false;
