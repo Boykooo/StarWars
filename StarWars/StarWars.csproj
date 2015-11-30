@@ -54,6 +54,7 @@
     <Compile Include="Game\CreateObject.Designer.cs">
       <DependentUpon>CreateObject.cs</DependentUpon>
     </Compile>
+    <Compile Include="Game\Enemy.cs" />
     <Compile Include="Game\GameLogic.cs" />
     <Compile Include="Game\Civilization.cs" />
     <Compile Include="EditorLevel\ActLevel.cs" />

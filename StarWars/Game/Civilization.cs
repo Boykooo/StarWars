@@ -21,7 +21,7 @@ namespace StarWars.Game
         }
         public void CollectResources()
         {
-            foreach(var p in Planets)
+            foreach (var p in Planets)
             {
                 Food += p.Food;
                 Titanium += p.Titanium;
@@ -31,7 +31,7 @@ namespace StarWars.Game
         }
         public void BuildShip(mapObject[,] map)
         {
-            foreach(var p in Planets)
+            foreach (var p in Planets)
             {
                 if (p.createObj.Pic[0].TypeShip != TypeShip.None)
                 {
@@ -42,7 +42,7 @@ namespace StarWars.Game
         }
         public void NewShip(mapObject[,] map, Planet p)
         {
-            Point newShip = Ship.SearchFreePlace(map, p.Location);
+            Point newShip = Ship.SearchInArea(map, p.Location, mapObject.None);
             switch (p.createObj.Pic[0].TypeShip)
             {
                 case TypeShip.Colonist:
@@ -63,8 +63,11 @@ namespace StarWars.Game
         }
         public void MoveShip(Point old, Point now)
         {
-            Ships.Add(now, Ships[old]);
-            Ships.Remove(old);
+            if (!Ships.ContainsKey(now))
+            {
+                Ships.Add(now, Ships[old]);
+                Ships.Remove(old);
+            }
         }
         public void AddPlanet(Planet planet)
         {

@@ -114,6 +114,13 @@ namespace StarWars.Game
                     draw.MovingShip = false;
                     break;
                 case mapObject.DestroyerEnemy:
+                    if (map.MapObject[start.X, start.Y] == mapObject.DestroyerYou)
+                    {
+                        map.MapObject[end.X, end.Y] = mapObject.None;
+                        game.KillEnemyShip(end);
+                        form.Invalidate(draw.GetMap(map.MapObject));
+                        draw.MovingShip = false;
+                    }
                     break;
                 case mapObject.ColonistEnemy:
                     break;
@@ -131,7 +138,6 @@ namespace StarWars.Game
                     }
                     break;
                 default:
-                    draw.MovingShip = false;
                     break;
             }
         }

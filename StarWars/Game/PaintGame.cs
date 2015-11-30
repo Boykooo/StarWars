@@ -11,10 +11,11 @@ namespace StarWars.Game
         public Bitmap MainBt { get; set; }
         public bool MovingShip { get; set; }
         private Pen penGreen;
-        private Pen penEnemy;
+        private Pen penEnemyPlanet;
         private Pen penYou;
         private Pen penChest;
         private Pen penPlanet;
+        private Pen penEnemyShip;
         private Bitmap tempBt;
         private Image planetPicture;
         private Image ChestPicture;
@@ -26,7 +27,8 @@ namespace StarWars.Game
         public PaintGame(int wh, int ht)
         {
             penGreen = new Pen(Color.Green, 1.5f);
-            penEnemy = new Pen(Color.Red, 2f);
+            penEnemyPlanet = new Pen(Color.Red, 2f);
+            penEnemyShip = new Pen(Color.Red, 1.5f);
             penYou = new Pen(Color.Purple, 3f);
             penChest = new Pen(Color.Yellow, 1.5f);
             penPlanet = new Pen(Color.AliceBlue, 1.5f);
@@ -83,7 +85,7 @@ namespace StarWars.Game
                                 g.DrawImage(planetPicture, new Point(i * MapStruct.BlockSize + 2, j * MapStruct.BlockSize + MapStruct.Shift + 2));
                                 break;
                             case mapObject.PlanetEnemy:
-                                g.DrawRectangle(penEnemy, i * MapStruct.BlockSize, j * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
+                                g.DrawRectangle(penEnemyPlanet, i * MapStruct.BlockSize, j * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
                                 g.DrawImage(planetPicture, new Point(i * MapStruct.BlockSize + 2, j * MapStruct.BlockSize + MapStruct.Shift + 2));
                                 break;
                             case mapObject.DestroyerYou:
@@ -93,6 +95,10 @@ namespace StarWars.Game
                             case mapObject.ColonistYou:
                                 g.DrawRectangle(new Pen(Color.Purple, 1.5f), i * MapStruct.BlockSize, j * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
                                 g.DrawImage(ColonistPicture, new Point(i * MapStruct.BlockSize + 4, j * MapStruct.BlockSize + MapStruct.Shift + 4));
+                                break;
+                            case mapObject.DestroyerEnemy:
+                                g.DrawRectangle(penEnemyShip, i * MapStruct.BlockSize, j * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
+                                g.DrawImage(DestroyerPicture, new Point(i * MapStruct.BlockSize + 4, j * MapStruct.BlockSize + MapStruct.Shift + 4));
                                 break;
                             default:
                                 break;
@@ -121,11 +127,11 @@ namespace StarWars.Game
                 foreach (var p in temp)
                 {
                     if (map[p.X, p.Y] == mapObject.DestroyerEnemy)
-                        g.DrawRectangle(penEnemy, p.X * MapStruct.BlockSize, p.Y * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
+                        g.DrawRectangle(penEnemyPlanet, p.X * MapStruct.BlockSize, p.Y * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
                     if (map[p.X, p.Y] == mapObject.ColonistEnemy)
-                        g.DrawRectangle(penEnemy, p.X * MapStruct.BlockSize, p.Y * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
+                        g.DrawRectangle(penEnemyPlanet, p.X * MapStruct.BlockSize, p.Y * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
                     if (map[p.X, p.Y] == mapObject.PlanetEnemy)
-                        g.DrawRectangle(penEnemy, p.X * MapStruct.BlockSize, p.Y * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
+                        g.DrawRectangle(penEnemyPlanet, p.X * MapStruct.BlockSize, p.Y * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);
                 }
                 // область самого корабля
                 g.DrawRectangle(new Pen(Color.Purple, 1.0f), location.X * MapStruct.BlockSize, location.Y * MapStruct.BlockSize + MapStruct.Shift, MapStruct.BlockSize, MapStruct.BlockSize);

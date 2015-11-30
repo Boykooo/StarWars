@@ -11,28 +11,30 @@ namespace StarWars.Game
         public Civilization You { get; set; }
         private Civilization enemy;
         private Dictionary<Point, Planet> planets;
+        private Enemy turnEnemy;
         public GameLogic(mapObject[,] map)
         {
             You = new Civilization();
             enemy = new Civilization();
             planets = new Dictionary<Point, Planet>();
+            turnEnemy = new Enemy();
             InitPlanets(map);
         }
         private void InitPlanets(mapObject[,] map)
         {
-            List<string> temp = new List<string> { "Ферос", "Иден Прайм", "Мавигон", "Тучанка","Палавен","Сур'Кеш","Сильва","Солярис","Сион","Велес","Элата"};
+            List<string> temp = new List<string> { "Ферос", "Иден Прайм", "Мавигон", "Тучанка", "Палавен", "Сур'Кеш", "Сильва", "Солярис", "Сион", "Велес", "Элата" };
             int indexName = 0;
             Random r = new Random();
             for (int i = 0; i < map.GetLength(0); i++)
             {
                 for (int j = 0; j < map.GetLength(1); j++)
                 {
-                    if (map[i,j] == mapObject.Planet)
-                        planets.Add(new Point(i, j), new Planet(new Point(i, j), temp[indexName++], r.Next(2, 7), r.Next(2, 4), r.Next(1,5), r.Next(50, 100)));
+                    if (map[i, j] == mapObject.Planet)
+                        planets.Add(new Point(i, j), new Planet(new Point(i, j), temp[indexName++], r.Next(2, 7), r.Next(2, 4), r.Next(1, 5), r.Next(50, 100)));
                 }
             }
         }
-        public void ChangeCivOnPlanet(Point locPlanet, nameCiv civ, IActForm act,mapObject[,] map,  Point ship)
+        public void ChangeCivOnPlanet(Point locPlanet, nameCiv civ, IActForm act, mapObject[,] map, Point ship)
         {
             if (civ == nameCiv.You)
             {
@@ -66,9 +68,9 @@ namespace StarWars.Game
         }
         public void EndTurn(mapObject[,] map)
         {
+            turnEnemy.Kill(enemy, map, You.Ships);
+            turnEnemy.Turn(enemy, map);
             You.EndTurn(map);
-            TurnEnemy();
-            enemy.EndTurn(map);
         }
         public void MoveShip(Point old, Point now)
         {
@@ -76,21 +78,23 @@ namespace StarWars.Game
         }
         public void SelectEnemyCapital(Point locPlanet, nameCiv civ, IActForm act, mapObject[,] map, Point ship)
         {
-            Random r = new Random();
             foreach (var p in planets.Keys)
             {
                 if (planets[p].civ == null)
                 {
                     planets[p].ChangeCiv(enemy);
                     enemy.AddPlanet(planets[p]);
-                    ChangeCivOnPlanet(new Point(p.X,p.Y), nameCiv.Enemy, act, map, ship);
+                    ChangeCivOnPlanet(new Point(p.X, p.Y), nameCiv.Enemy, act, map, ship);
                     break;
                 }
             }
         }
-        private void TurnEnemy()
+        public void KillEnemyShip(Point ship)
         {
-            
+            if (enemy.Ships.ContainsKey(ship))
+            {
+                enemy.Ships.Remove(ship);
+            }
         }
     }
 }
