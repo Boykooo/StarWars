@@ -87,11 +87,20 @@ namespace StarWars.Game
         }
         public void EndTurn()
         {
-           
+            if (game.CheckDefeat())
+            {
+                form.Status("Вы проиграли!");
+            }
+            else if (game.CheckWin())
+            {
+                form.Status("Вы победили!");
+            }
+            else
+            {
                 game.EndTurn(map.MapObject);
                 form.Invalidate(draw.GetMap(map.MapObject));
                 form.ChangeResources(game.You.Food, game.You.Titanium, game.You.Iridium, game.You.Gold);
-            
+            }
         }
         public void ReResources(int food, int titanium, int iridium, int gold)
         {
