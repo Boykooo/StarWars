@@ -17,10 +17,10 @@ namespace StarWars.Game
         }
         public void Turn(Civilization civ, mapObject[,] map)
         {
-            TurnShip(civ, map);
-            Build(civ, map);
             civ.ClearTurnShips();
             civ.CollectResources();
+            TurnShip(civ, map);
+            Build(civ, map);
         }
         public void Kill(Civilization enemy, mapObject[,] map, Dictionary<Point, Ship> you)
         {

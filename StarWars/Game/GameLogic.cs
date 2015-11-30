@@ -12,8 +12,10 @@ namespace StarWars.Game
         private Civilization enemy;
         private Dictionary<Point, Planet> planets;
         private Enemy turnEnemy;
+        private Random r;
         public GameLogic(mapObject[,] map)
         {
+            r = new Random();
             You = new Civilization();
             enemy = new Civilization();
             planets = new Dictionary<Point, Planet>();
@@ -95,6 +97,83 @@ namespace StarWars.Game
             {
                 enemy.Ships.Remove(ship);
             }
+        }
+        public void MoveShip(Point start, Point end, mapObject[,] map, IForm form, PaintGame draw, IActForm actForm)
+        {
+            switch (map[end.X, end.Y])
+            {
+                case mapObject.None:
+                    form.Invalidate(draw.MoveShip(map, start, end));
+                    break;
+                case mapObject.Chest:
+                    form.Invalidate(draw.MoveShip(map, start, end));
+                    form.Status(RandomChest());
+                    form.ChangeResources(You.Food, You.Titanium, You.Iridium, You.Gold);
+                    break;
+                case mapObject.Asteroid:
+                    draw.MovingShip = false;
+                    break;
+                case mapObject.DestroyerEnemy:
+                    if (map[start.X, start.Y] == mapObject.DestroyerYou)
+                    {
+                        map[end.X, end.Y] = mapObject.None;
+                        KillEnemyShip(end);
+                        form.Invalidate(draw.GetMap(map));
+                        draw.MovingShip = false;
+                    }
+                    break;
+                case mapObject.ColonistEnemy:
+                    if (map[start.X, start.Y] == mapObject.DestroyerYou)
+                    {
+                        map[end.X, end.Y] = mapObject.None;
+                        KillEnemyShip(end);
+                        form.Invalidate(draw.GetMap(map));
+                        draw.MovingShip = false;
+                    }
+                    break;
+                case mapObject.PlanetYou:
+                    draw.MovingShip = false;
+                    break;
+                case mapObject.PlanetEnemy:
+                    draw.MovingShip = false;
+                    break;
+                case mapObject.Planet:
+                    if (map[start.X, start.Y] == mapObject.ColonistYou)
+                    {
+                        ChangeCivOnPlanet(end, nameCiv.You, actForm, map, start);
+                        form.Invalidate(draw.GetMap(map));
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        private string RandomChest()
+        {
+            int x = r.Next(1, 5);
+            int bonus = r.Next(5, 16);
+            string b = "";
+            switch (x)
+            {
+                case 1:
+                    b += "Еда + " + bonus;
+                    You.Food += bonus;
+                    break;
+                case 2:
+                    b += "Титан + " + bonus;
+                    You.Titanium += bonus;
+                    break;
+                case 3:
+                    b += "Иридий + " + bonus;
+                    You.Iridium += bonus;
+                    break;
+                case 4:
+                    bonus = r.Next(100, 300);
+                    b += "Золото + " + bonus;
+                    You.Gold += bonus;
+                    break;
+            }
+            return b;
         }
     }
 }

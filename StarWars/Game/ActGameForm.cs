@@ -60,7 +60,7 @@ namespace StarWars.Game
                 {
                     if (game.You.Ships.ContainsKey(pointShip) && !game.You.Ships[pointShip].Turn)
                     {
-                        MoveShip(pointShip, location);
+                        game.MoveShip(pointShip, location, map.MapObject, form, draw, this);
                         if (game.You.Ships.Keys.Contains(pointShip))
                         {
                             game.You.Ships[pointShip].Turn = draw.MovingShip;
@@ -97,76 +97,6 @@ namespace StarWars.Game
         public void ReResources(int food, int titanium, int iridium, int gold)
         {
             form.ChangeResources(food, titanium, iridium, gold);
-        }
-        public void MoveShip(Point start, Point end)
-        {
-            switch (map.MapObject[end.X, end.Y])
-            {
-                case mapObject.None:
-                    form.Invalidate(draw.MoveShip(map.MapObject, start, end));
-                    break;
-                case mapObject.Chest:
-                    form.Invalidate(draw.MoveShip(map.MapObject, start, end));
-                    form.Status(RandomChest());
-                    form.ChangeResources(game.You.Food, game.You.Titanium, game.You.Iridium, game.You.Gold);
-                    break;
-                case mapObject.Asteroid:
-                    draw.MovingShip = false;
-                    break;
-                case mapObject.DestroyerEnemy:
-                    if (map.MapObject[start.X, start.Y] == mapObject.DestroyerYou)
-                    {
-                        map.MapObject[end.X, end.Y] = mapObject.None;
-                        game.KillEnemyShip(end);
-                        form.Invalidate(draw.GetMap(map.MapObject));
-                        draw.MovingShip = false;
-                    }
-                    break;
-                case mapObject.ColonistEnemy:
-                    break;
-                case mapObject.PlanetYou:
-                    draw.MovingShip = false;
-                    break;
-                case mapObject.PlanetEnemy:
-                    draw.MovingShip = false;
-                    break;
-                case mapObject.Planet:
-                    if (map.MapObject[start.X, start.Y] == mapObject.ColonistYou)
-                    {
-                        game.ChangeCivOnPlanet(end, nameCiv.You, this, map.MapObject, start);
-                        form.Invalidate(draw.GetMap(map.MapObject));
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-        private string RandomChest()
-        {
-            int x = r.Next(1, 5);
-            int bonus = r.Next(5, 16);
-            string b = "";
-            switch (x)
-            {
-                case 1:
-                    b += "Еда + " + bonus;
-                    game.You.Food += bonus;
-                    break;
-                case 2:
-                    b += "Титан + " + bonus;
-                    game.You.Titanium += bonus;
-                    break;
-                case 3:
-                    b += "Иридий + " + bonus;
-                    game.You.Iridium += bonus;
-                    break;
-                case 4:
-                    bonus = r.Next(100, 300);
-                    b += "Золото + " + bonus;
-                    game.You.Gold += bonus;
-                    break;
-            }
-            return b;
         }
         private void SelectCapitalPlanet(Point location)
         {
